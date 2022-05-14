@@ -1,21 +1,49 @@
 <div>
-  <h3><%= @user.name %></h3>
+  <h2>User info</h2>
   <%= image_tag @user.get_profile_image(100,100) %>
+  <table>
+    <tr></tr>
+    <tr>
+      <th>name</th>
+      <th><h3><%= @user.name %></h3></th>
+    </tr>
+    <tr>
+      <th>introduction</th>
+    </tr>
+  </table>
   <% if @user == current_user %>
-  <p><%= link_to "プロフィール編集", edit_user_path %></p
+  <p><%= link_to "プロフィール編集", edit_user_path %></p>
+  <% end %>
+  <h1>New book</h1>
+  <%= form_with model: @book do |f| %>
+    <p>Title</p>
+      <%= f.text_field :shop_name %>
+    <p>Opinion</p>
+      <%= f.text_area :caption %>
+    <br><%= f.submit 'Create Book' %>
   <% end %>
 </div>
 
 <!-- ユーザーの投稿一覧 -->
 
-<% @post_images.each do |post_image| %>
+
+<h2>Books</h2>
+<table>
+  <thead>
+    <th></th>
+    <th>Title</th>
+    <th>Opinion</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+<% @books.each do |book| %>
 <div>
-  <%= link_to post_image_path(post_image.id) do %>
-    <%= image_tag post_image.get_image %>
-  <% end %>
-  <p>投稿ユーザー画像：<%= image_tag post_image.user.get_profile_image(100,100) %></p>
-  <p>ショップ名：<%= post_image.shop_name %></p>
-  <p>説明：<%= post_image.caption %></p>
-  <p>ユーザーネーム：<%= post_image.user.name %></p>
+  <p><%= image_tag book.user.get_profile_image(100,100) %></p>
+  <p><%= book.title %></p>
+  <p><%= book.body %></p>
 </div>
 <% end %>

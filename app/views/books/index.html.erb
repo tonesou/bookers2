@@ -1,0 +1,31 @@
+ <h2>User info</h2>
+ <%= image_tag @user.get_profile_image(100,100) %>
+ <table>
+   <tr></tr>
+   <tr>
+     <th>name</th>
+     <th><%= @user.name %></th>
+   </tr>
+   <tr>
+     <th>introduction</th>
+   </tr>
+ </table>
+ <%= form_with model: @book do |f| %>
+    <p>Title</p>
+      <%= f.text_field :shop_name %>
+    <p>Opinion</p>
+      <%= f.text_area :caption %>
+    <%= f.submit '投稿' %>
+  <% end %>
+
+<div>
+<% @books.each do |book| %>
+  <%= link_to book_path(book.id) do %>
+    <%= image_tag @user.get_profile_image(100,100) %>
+  <% end %>
+  <p>New book：<%= image_tag @user.get_profile_image(100,100) %></p>
+  <p>Title：<%= book.title %></p>
+  <p>Opinion：<%= book.body %></p>
+  <p>ユーザー：<%= book.user_id %></p>
+</div>
+<% end %>
