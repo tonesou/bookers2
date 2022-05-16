@@ -1,3 +1,8 @@
+<% if flash[:notice] %>
+      <div id="notice">
+        <font color="green"><%= flash[:notice] %></font>
+      </div>
+    <% end %>
  <h2>User info</h2>
  <%= image_tag @user.get_profile_image(100,100) %>
  <table>
@@ -20,6 +25,14 @@
     <%= f.submit 'Create Book' %>
   <% end %>
 <h2>Books</h2>
+<% if @book.errors.any? %>
+  <%= @book.errors.count %> errors prohibited this book from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 <table>
     <thead>
       <tr>
