@@ -1,11 +1,17 @@
-<% if flash[:notice] %>
-      <div id="notice">
-        <font color="green"><%= flash[:notice] %></font>
-      </div>
-    <% end %>
+<% if @book.errors.any? %>
+  <%= @book.errors.count %> errors prohibited this book from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+　　<% end %>
+  </ul>
+<% end %>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
  <h2>User info</h2>
  <%= image_tag @user.get_profile_image(100,100) %>
- <table>
+ <table class="table">
    <tr></tr>
    <tr>
      <th>name</th>
@@ -13,8 +19,11 @@
    </tr>
    <tr>
      <th>introduction</th>
+     <th><%= @user.introduction %></th>
    </tr>
  </table>
+ <div class="row"></div>
+
   <%= link_to "プロフィール編集", edit_user_path(current_user) %>
 
  <%= form_with model: @book do |f| %>
@@ -22,18 +31,12 @@
       <%= f.text_field :title %>
     <p>Opinion</p>
       <%= f.text_area :body %><br>
-    <%= f.submit 'Create Book' %>
+    <%= f.submit 'Create Book', class: "btn btn-sm btn-success" %>
   <% end %>
+  </div>
+  <div class="col-md-8 offset-md-1">
 <h2>Books</h2>
-<% if @book.errors.any? %>
-  <%= @book.errors.count %> errors prohibited this book from being saved:
-  <ul>
-    <% @book.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
-<table>
+<table class="table">
     <thead>
       <tr>
         <th></th>
@@ -52,6 +55,9 @@
         <td><%= link_to book.title, book_path(book.id) %></td>
         <td><%= book.body %></td>
       </tr>
+      <% end %>
     </tbody>
   </table>
-  <% end %>
+  </div>
+  </div>
+  </div>

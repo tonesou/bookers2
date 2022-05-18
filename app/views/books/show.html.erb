@@ -1,11 +1,9 @@
-<% if flash[:notice] %>
-      <div id="notice">
-        <font color="green"><%= flash[:notice] %></font>
-      </div>
-    <% end %>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
 <h2>User info</h2>
  <%= image_tag @user.get_profile_image(100,100) %>
- <table>
+ <table class="table">
    <tr></tr>
    <tr>
      <th>name</th>
@@ -13,8 +11,11 @@
    </tr>
    <tr>
      <th>introduction</th>
+     <th><%= @user.introduction %></th>
    </tr>
  </table>
+ <div class="row"></div>
+
   <%= link_to "プロフィール編集", edit_user_path(current_user) %>
 
 
@@ -23,19 +24,29 @@
       <%= f.text_field :title %>
     <p>Opinion</p>
       <%= f.text_area :body %><br>
-    <%= f.submit 'Create Book' %>
+    <%= f.submit 'Create Book', class: "btn btn-sm btn-success" %>
  <% end %>
-
+  </div>
+  <div class="col-md-8 offset-md-1">
  <h1>Book detail</h1>
-  <% @books.each do |book| %>
-    <%= link_to user_path(book.user.id) do %>
-    <%= image_tag book.user.get_profile_image(100,100) %>
-  <% end %>
-  <% end %>
-<p><%= @book.user.name %></p>
-<p>Title：<%= @book.title %></p>
-<p>Opinion：<%= @book.body %></p>
-<% if @book.user == current_user %>
-  <%= link_to "Edit", edit_book_path(@book) %>
-  <%= link_to "destroy", book_path(@book), method: :delete %>
-<% end %>
+ <table class="table">
+   <tbody>
+   <tr>
+     <td><%= link_to user_path(@book.user.id) do %>
+    <%= image_tag @book.user.get_profile_image(100,100) %>
+  <% end %><br>
+  <%= link_to @book.user.name, user_path(@book.user.id) %></td>
+  <td><%= link_to @book.title, book_path(@book.id) %></td>
+  <td><%= @book.body %></td>
+  <td><% if @book.user == current_user %>
+  <%= link_to "Edit", edit_book_path(@book),class: "btn btn-sm btn-success edit_book_8242" %>
+  <% end %></td>
+  <td><% if @book.user == current_user %>
+  <%= link_to "destroy", book_path(@book), method: :delete, class: "btn btn-sm btn-danger destroy_book_8242" %>
+<% end %></td>
+   </tr>
+   </tbody>
+ </table>
+  </div>
+  </div>
+  </div>
