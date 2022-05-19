@@ -4,6 +4,7 @@
 <h2>User info</h2>
  <%= image_tag @user.get_profile_image(100,100) %>
  <table class="table">
+   <tbody>
    <tr></tr>
    <tr>
      <th>name</th>
@@ -13,12 +14,15 @@
      <th>introduction</th>
      <th><%= @user.introduction %></th>
    </tr>
+   </tbody>
  </table>
  <div class="row"></div>
 
-  <%= link_to "プロフィール編集", edit_user_path(current_user) %>
+ <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block edit_user_11216" do %>
+ <i class="fa fa-user-cog fa-w-20"></i>
+ <% end %>
 
-
+<h2>New book</h2>
 <%= form_with model: @book_new do |f| %>
     <p>Title</p>
       <%= f.text_field :title %>
@@ -38,12 +42,16 @@
   <%= link_to @book.user.name, user_path(@book.user.id) %></td>
   <td><%= link_to @book.title, book_path(@book.id) %></td>
   <td><%= @book.body %></td>
-  <td><% if @book.user == current_user %>
-  <%= link_to "Edit", edit_book_path(@book),class: "btn btn-sm btn-success edit_book_8242" %>
-  <% end %></td>
-  <td><% if @book.user == current_user %>
-  <%= link_to "destroy", book_path(@book), method: :delete, class: "btn btn-sm btn-danger destroy_book_8242" %>
-<% end %></td>
+  <td>
+    <% if @book.user == current_user %>
+    <%= link_to "Edit", edit_book_path(@book),class: "btn btn-sm btn-success edit_book_8242" %>
+    <% end %>
+  </td>
+  <td>
+    <% if @book.user == current_user %>
+    <%= link_to "Destroy", book_path, method: :delete, class: "btn btn-sm btn-danger destroy_book_8242" %>
+    <% end %>
+  </td>
    </tr>
    </tbody>
  </table>
