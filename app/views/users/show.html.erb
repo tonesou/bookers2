@@ -9,7 +9,7 @@
     <tr></tr>
     <tr>
       <th>name</th>
-      <th><h3><%= @user.name %></h3></th>
+      <th><%= @user.name %></th>
     </tr>
     <tr>
       <th>introduction</th>
@@ -19,7 +19,7 @@
   </table>
   <div class="row"></div>
   <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block edit_user_11216" do %>
- <i class="fa fa-user-cog fa-w-20"></i>
+ <i class="fas fa-user-cog fa-w-20"></i>
  <% end %>
   <h1>New book</h1>
   <%= form_with model: @book do |f| %>
